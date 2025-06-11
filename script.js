@@ -1,8 +1,13 @@
-//Computer Choice
-//
-// Logic to get computer choice
-    //function to randomly return "rock" "paper" "scissors"
-function getComputerChoice(){
+
+//Global Score Variables
+let playerScore = 0;
+let computerScore = 0;
+
+
+// Logic for a single round of gameplay
+function playRound(){
+    //Function to generate computer choices
+    function getComputerChoice(){
     let choice = Math.floor((Math.random() * 3) + 1);
 
     if (choice === 1){
@@ -14,32 +19,18 @@ function getComputerChoice(){
     if (choice === 3){
         return "scissors"
     }
+
 }
 
-
-
-
-// Logic to get Human choice
+    //Function to select player choice
 function getHumanChoice(){
-    let chosen = prompt("Choose Rock, Paper or Scissors");
-    let human = chosen.toLowerCase();
-    if (human === "rock"){
-        return "rock"
-    }
-    if (human === "paper"){
-        return "paper"
-    }
-    if (human === "scissors")
-        return "scissors"
+    let human = prompt("Choose Rock, Paper or Scissors").toLowerCase();
+    return human;
 }
 
 
-
-// Logic for a single round of gameplay
-
-    //All player and comp choice combinations and win/lose outcome.
-    //score increment after win or lose and no increment on draw.
-function playRound(humanChoice, computerChoice){
+    //Function to compare choices and determine a round winner
+function determineWinner(humanChoice, computerChoice){
  if(humanChoice == computerChoice){
         return "It's a tie";
     }
@@ -53,39 +44,47 @@ function playRound(humanChoice, computerChoice){
    }
 
    else{return"Computer Wins!"}
-}
-
-
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-const result = playRound(humanSelection,computerSelection)
-     console.log(result)
 
    
+}
+//Global Variables
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+const result = determineWinner(humanSelection,computerSelection)
 
-
-
-
-function playGame(){
-playRound(humanSelection, computerSelection); 
-
-
-// Logic of the player scores
-        let playerScore = 0;
-        let botScore = 0;
-
+//Score increments depending on round winner
     if (result === "You Win!"){
     playerScore++
 }
     if(result === "Computer Wins!"){
-    botScore++
-    }
-
-console.log("You selected: " + humanSelection + "   " + "Computer selected: " + computerSelection)
-
-console.log("Your score = " +playerScore+ " Computer = " +botScore)
-
+    computerScore++
 }
 
+//Round Result output
+console.log(result);
+console.log("You selected: " + humanSelection + "   " + "Computer selected: " + computerSelection);
+console.log("Your score = " +playerScore+ " Computer = " +computerScore);
+return;
+}
+
+
+
+//Function for a full game with 5 rounds
+function playGame(){
+    for (let round = 1; round <=5; round++){
+        playRound()};
+//Game over message at the end of 5 rounds with winner declared
+        console.log("Game Over")
+
+    if (playerScore > computerScore){
+        console.log("You Win!!!😁") 
+    }
+    else if(computerScore > playerScore){
+        console.log("You lose 🙁")}
+    else {console.log("It's a tie 😲")}
+    
+    
+}
+
+//RUN GAME(call function)
 playGame()
