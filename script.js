@@ -3,7 +3,34 @@
 let playerScore = 0;
 let computerScore = 0;
 
+//UI Logic
+let rock = document.querySelector('.rock');
+let paper = document.querySelector('.paper');
+let scissors = document.querySelector('.scissors');
+let press ;
 
+rock.addEventListener('click',choseRock)
+
+function choseRock(){
+    press = "rock";
+    playRound();
+  
+}
+
+paper.addEventListener('click',chosePaper)
+
+function chosePaper(){
+    press = "paper";
+    playRound();
+  
+}
+scissors.addEventListener('click',choseScissors)
+
+function choseScissors(){
+    press = "scissors";
+    playRound();
+  
+}
 // Logic for a single round of gameplay
 function playRound(){
     //Function to generate computer choices
@@ -24,10 +51,8 @@ function playRound(){
 
     //Function to select player choice
 function getHumanChoice(){
-    let human = prompt("Choose Rock, Paper or Scissors").toLowerCase();
-    return human;
+    return press;
 }
-
 
     //Function to compare choices and determine a round winner
 function determineWinner(humanChoice, computerChoice){
@@ -71,8 +96,8 @@ return;
 
 //Function for a full game with 5 rounds
 function playGame(){
-    for (let round = 1; round <=5; round++){
-        playRound()};
+  //  for (let round = 1; round <=5; round++){
+    //    playRound()};
 //Game over message at the end of 5 rounds with winner declared
         console.log("Game Over")
 
@@ -87,4 +112,5 @@ function playGame(){
 }
 
 //RUN GAME(call function)
-playGame()
+
+
