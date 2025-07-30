@@ -31,6 +31,8 @@ function choseScissors(){
     playRound();
   
 }
+
+
 // Logic for a single round of gameplay
 function playRound(){
     //Function to generate computer choices
@@ -65,30 +67,40 @@ function determineWinner(humanChoice, computerChoice){
         (humanChoice == 'scissors' && computerChoice == 'paper') ||
         (humanChoice == 'rock' && computerChoice == 'scissors')
    ){
-    return "You Win!";
+    return "You Win This Round!";
    }
 
-   else{return"Computer Wins!"}
+   else{return"Computer Wins This Round!"}
 
    
 }
+
 //Global Variables
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 const result = determineWinner(humanSelection,computerSelection)
 
 //Score increments depending on round winner
-    if (result === "You Win!"){
+    if (result === "You Win This Round!"){
     playerScore++
 }
-    if(result === "Computer Wins!"){
+    if(result === "Computer Wins This Round!"){
     computerScore++
 }
 
+
 //Round Result output
-console.log(result);
-console.log("You selected: " + humanSelection + "   " + "Computer selected: " + computerSelection);
-console.log("Your score = " +playerScore+ " Computer = " +computerScore);
+let results = document.querySelector('.results')
+let you = document.querySelector('.playerChose')
+let comp = document.querySelector('.computerChose')
+let playScore = document.querySelector('.playerScore')
+let compScore = document.querySelector('.computerScore')
+
+results.textContent = result;
+you.textContent =" " + humanSelection;
+comp.textContent =" " + computerSelection;
+playScore.textContent= " " +playerScore;
+compScore.textContent= " " +computerScore;
 return;
 }
 
@@ -111,6 +123,5 @@ function playGame(){
     
 }
 
-//RUN GAME(call function)
 
 
