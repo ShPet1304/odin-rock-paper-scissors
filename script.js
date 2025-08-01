@@ -1,15 +1,55 @@
 
-//Global Score Variables
+//Global Variables
 let playerScore = 0;
 let computerScore = 0;
-
-//UI Logic
+const maxScore = 5;
+let results = document.querySelector('.results')
+let you = document.querySelector('.playerChose')
+let comp = document.querySelector('.computerChose')
+let playScore = document.querySelector('.playerScore')
+let compScore = document.querySelector('.computerScore')
+let win = document.querySelector('.winner')
+const gameDiv = document.querySelector('.container')
+const startDiv = document.querySelector('.startContainer')
+const gameResults = document.querySelector('.gameOver')
+let reset = document.querySelector('.startButton');
 let rock = document.querySelector('.rock');
 let paper = document.querySelector('.paper');
 let scissors = document.querySelector('.scissors');
 let press ;
 
-rock.addEventListener('click',choseRock)
+//UI Logic
+showStart();
+
+function showGame(){
+    playerScore = 0;
+    computerScore = 0;
+    results.textContent = "";
+    playScore.textContent= " " +playerScore;
+    compScore.textContent= " " +computerScore;
+    gameDiv.style.display = 'flex';
+    startDiv.style.display = 'none';
+    gameResults.style.display = 'none';
+}
+
+function showStart(){
+    startDiv.style.display = 'flex';
+    gameDiv.style.display = 'none';
+    gameResults.style.display = 'none';
+}
+
+function gameOver(){
+    gameResults.style.display = 'block';
+    startDiv.style.display = 'none';
+    gameDiv.style.display = 'none';
+}
+
+
+
+//Human selection
+rock.addEventListener('click',choseRock);
+paper.addEventListener('click',chosePaper);
+scissors.addEventListener('click',choseScissors);
 
 function choseRock(){
     press = "rock";
@@ -17,19 +57,14 @@ function choseRock(){
   
 }
 
-paper.addEventListener('click',chosePaper)
-
 function chosePaper(){
     press = "paper";
     playRound();
-  
 }
-scissors.addEventListener('click',choseScissors)
 
 function choseScissors(){
     press = "scissors";
     playRound();
-  
 }
 
 
@@ -37,28 +72,28 @@ function choseScissors(){
 function playRound(){
     //Function to generate computer choices
     function getComputerChoice(){
-    let choice = Math.floor((Math.random() * 3) + 1);
+        let choice = Math.floor((Math.random() * 3) + 1);
 
-    if (choice === 1){
-        return "rock"
-    }
-    if  (choice === 2){
-        return "paper"
-    }
-    if (choice === 3){
-        return "scissors"
-    }
+        if (choice === 1){
+            return "rock"
+        };
+        if  (choice === 2){
+            return "paper"
+        };
+        if (choice === 3){
+            return "scissors"
+        };
 
 }
 
-    //Function to select player choice
+    //Function to get player choice
 function getHumanChoice(){
     return press;
 }
 
     //Function to compare choices and determine a round winner
 function determineWinner(humanChoice, computerChoice){
- if(humanChoice == computerChoice){
+    if(humanChoice == computerChoice){
         return "It's a tie";
     }
 
@@ -70,12 +105,12 @@ function determineWinner(humanChoice, computerChoice){
     return "You Win This Round!";
    }
 
-   else{return"Computer Wins This Round!"}
+   else{return"I Win This Round!"}
 
    
 }
 
-//Global Variables
+//Round Variables
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 const result = determineWinner(humanSelection,computerSelection)
@@ -84,18 +119,20 @@ const result = determineWinner(humanSelection,computerSelection)
     if (result === "You Win This Round!"){
     playerScore++
 }
-    if(result === "Computer Wins This Round!"){
+    if(result === "I Win This Round!"){
     computerScore++
 }
 
 
-//Round Result output
-let results = document.querySelector('.results')
-let you = document.querySelector('.playerChose')
-let comp = document.querySelector('.computerChose')
-let playScore = document.querySelector('.playerScore')
-let compScore = document.querySelector('.computerScore')
+   if (playerScore === maxScore || computerScore === maxScore){
+        gameOver();
+        gameWinner();
+       
+    }
 
+
+//Round Result output
+win.textContent=" " + gameWinner()
 results.textContent = result;
 you.textContent =" " + humanSelection;
 comp.textContent =" " + computerSelection;
@@ -106,22 +143,15 @@ return;
 
 
 
-//Function for a full game with 5 rounds
-function playGame(){
-  //  for (let round = 1; round <=5; round++){
-    //    playRound()};
-//Game over message at the end of 5 rounds with winner declared
-        console.log("Game Over")
 
-    if (playerScore > computerScore){
-        console.log("You Win!!!😁") 
+function gameWinner(){
+    if (playerScore === maxScore){
+        return "You"
     }
-    else if(computerScore > playerScore){
-        console.log("You lose 🙁")}
-    else {console.log("It's a tie 😲")}
-    
-    
-}
 
+   if (computerScore === maxScore){
+        return "I"
+    }
+}
 
 
