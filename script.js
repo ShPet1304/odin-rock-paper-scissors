@@ -25,15 +25,17 @@ function showGame(){
     playerScore = 0;
     computerScore = 0;
     results.textContent = "";
+    you.textContent = "";
+    comp.textContent = "";
     playScore.textContent= " " +playerScore;
     compScore.textContent= " " +computerScore;
-    gameDiv.style.display = 'flex';
+    gameDiv.style.display = 'block';
     startDiv.style.display = 'none';
     gameResults.style.display = 'none';
 }
 
 function showStart(){
-    startDiv.style.display = 'flex';
+    startDiv.style.display = 'block';
     gameDiv.style.display = 'none';
     gameResults.style.display = 'none';
 }
